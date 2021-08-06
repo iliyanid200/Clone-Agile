@@ -1,0 +1,102 @@
+*{
+  font-family: "Arial", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+
+}
+.App{
+width:100%;
+height:100vh;
+background-color: rgb(247, 228, 203);
+}
+#travelport_logo{
+  width:200px;
+  display:inline-block;
+  padding:10px;
+}
+h1{
+  margin:0px;
+  padding:10px;
+  text-align: left;
+  border:solid white 2px;
+  background-color:white;
+  color:black;
+  width:50vw;
+  
+}
+h2{
+  padding:0px;
+  margin:0px;
+}
+form{
+  border:solid black 2px;
+  border-radius:40px;
+  width:600px;
+  height: 680px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
+  padding: 0px 60px;
+  background-color:white;
+
+}
+  .container{
+    width:500px;
+    height: auto;
+    max-height: 680px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align: center;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+  .container > div{
+    border-bottom:2px solid black;
+    padding:20px 0px;
+  }
+
+.className > input{
+  width:400px;
+  padding:5px;
+}
+
+.classDate > div{
+  display:inline-block;
+  margin:0px 10px;
+}
+
+.classForms >div{
+  display:inline-block;
+  margin:0px 10px;
+}
+  .classForms>div>input{
+    width:200px;
+  }
+
+.classEmails>div>button, .classEmails>button{
+  border:none;
+  background-color:black;
+  color:white;
+  padding:2px 5px;
+}
+  .classEmails>div>button:hover, .classEmails>button:hover{
+    cursor:pointer;
+  }
+  .classEmails>div>input{
+    width:330px;
+    margin:0px 5px 5px 0px;
+  }
+
+.generateTemplate{
+  margin:30px 0px;
+  color:white;
+  background-color:black;
+  padding:20px;
+  font-size:16px;
+}
+  .generateTemplate:hover{
+    cursor:pointer;
+  }
+
