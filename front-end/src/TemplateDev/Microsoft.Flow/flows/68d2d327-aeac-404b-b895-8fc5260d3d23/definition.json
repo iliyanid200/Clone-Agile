@@ -1,0 +1,234 @@
+{
+  "name": "5dbbaf12-b0ed-4e3a-b3f1-75bd596a0408",
+  "id": "/providers/Microsoft.Flow/flows/5dbbaf12-b0ed-4e3a-b3f1-75bd596a0408",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Finale Test Register",
+    "definition": {
+      "metadata": {
+        "workflowEntityId": null,
+        "processAdvisorMetadata": null,
+        "flowclientsuspensionreason": "None",
+        "flowclientsuspensiontime": null,
+        "creator": {
+          "id": "0d8c8bdf-98f7-47e2-9147-f5acc58199a3",
+          "type": "User",
+          "tenantId": "6416915b-6778-4c36-ba4f-e56ff64a8bb7"
+        },
+        "provisioningMethod": "FromDefinition",
+        "failureAlertSubscription": true,
+        "clientLastModifiedTime": "2021-08-09T19:57:43.063954Z"
+      },
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_new_response_is_submitted": {
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+              "connectionName": "shared_microsoftforms",
+              "operationId": "CreateFormWebhook"
+            },
+            "parameters": {
+              "form_id": "W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUMlRCVU5BMkgxRElBUUFNM09JNkc5Njk0TC4u"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_response_details": {
+          "runAfter": {},
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+              "connectionName": "shared_microsoftforms",
+              "operationId": "GetFormResponseById"
+            },
+            "parameters": {
+              "form_id": "W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUMlRCVU5BMkgxRElBUUFNM09JNkc5Njk0TC4u",
+              "response_id": "@triggerOutputs()?['body/resourceData/responseId']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Send_an_email_notification_(V3)": {
+          "runAfter": {
+            "Add_a_row_into_a_table": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sendmail",
+              "connectionName": "shared_sendmail",
+              "operationId": "SendEmailV3"
+            },
+            "parameters": {
+              "request/to": "@{outputs('Get_response_details')?['body/responder']};",
+              "request/subject": "Succesfull Registration for Finale Test",
+              "request/text": "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\nemail@email.com<br>\nUse this link if you need to be removed from the course: <br>\n<br>\nhttps://forms.office.com/Pages/ResponsePage.aspx?id=W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNURTJDMVZSQkxDNTBCNjY0QUNONjJRTUdOVi4u</p>"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_event_(V4)": {
+          "runAfter": {
+            "Send_an_email_notification_(V3)": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "connectionName": "shared_office365",
+              "operationId": "V4CalendarPostItem"
+            },
+            "parameters": {
+              "table": "AAMkADYwNDI2YjM5LWEwMDEtNDQ4YS04MDJkLWMxOTNiZjg2ZTcyNwBGAAAAAADD-by0ElfBSIm3b-YcPsX6BwC8Ve07jesgQrXH1UDvOdvyAAAAk5atAAAcxkeEL9d2R6IhU9EmPJkZAAAAAEg3AAA=",
+              "item/subject": "Finale Test",
+              "item/start": "2021-07-29T13:03:00",
+              "item/end": "2021-07-29T15:03:00",
+              "item/timeZone": "(UTC-07:00) Mountain Time (US & Canada)",
+              "item/body": "<p>Class: Finale Test<br>\nYour Instructors Email's Are:<br>\nemail@email.com<br>\nCourse Link: link</p>",
+              "item/location": "MS Teams",
+              "item/recurrence": "daily",
+              "item/numberOfOccurences": 2,
+              "item/reminderMinutesBeforeStart": 15,
+              "item/isReminderOn": true,
+              "item/showAs": "busy",
+              "item/responseRequested": false
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_worksheet": {
+          "runAfter": {
+            "Get_response_details": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI": "/Class Leger.xlsx",
+            "tableId": null
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+              "connectionName": "shared_excelonlinebusiness",
+              "operationId": "CreateWorksheet"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!yyd3UvWQUEWBsq-IBKWWz7xMJNqfPMpMrf0sy0vbLidiVBR0bz75T7Dua8_0uE5Z",
+              "file": "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI",
+              "body/name": "AgileClass2"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_table": {
+          "runAfter": {
+            "Create_worksheet": [
+              "Succeeded",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI": "/Class Leger.xlsx",
+            "tableId": null
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+              "connectionName": "shared_excelonlinebusiness",
+              "operationId": "CreateTable"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!yyd3UvWQUEWBsq-IBKWWz7xMJNqfPMpMrf0sy0vbLidiVBR0bz75T7Dua8_0uE5Z",
+              "file": "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI",
+              "table/Range": "@{outputs('Create_worksheet')?['body/name']}!A1:A2",
+              "table/TableName": "Agile",
+              "table/ColumnsNames": "Name;Email"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Add_a_row_into_a_table": {
+          "runAfter": {
+            "Create_table": [
+              "Succeeded",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI": "/Class Leger.xlsx"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+              "connectionName": "shared_excelonlinebusiness",
+              "operationId": "AddRowV2"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!yyd3UvWQUEWBsq-IBKWWz7xMJNqfPMpMrf0sy0vbLidiVBR0bz75T7Dua8_0uE5Z",
+              "file": "01MKVNE5NM5KR33HQJINGIFUUYENG3DYTI",
+              "table": "Agile",
+              "item/Name": "@outputs('Get_response_details')?['body/rc46c54dafc3c4a7fb46e57a250762e05']",
+              "item/Email": "@outputs('Get_response_details')?['body/responder']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "connectionReferences": {
+      "shared_microsoftforms": {
+        "connectionName": "shared-microsoftform-3289c02c-e3bb-487e-9113-f16dabbc4067",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+        "tier": "NotSpecified"
+      },
+      "shared_sendmail": {
+        "connectionName": "shared-sendmail-12e220b8-27c1-4777-85cd-eb6c-b68779c0",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sendmail",
+        "tier": "NotSpecified"
+      },
+      "shared_office365": {
+        "connectionName": "shared-office365-a8fb2cfb-e886-4cd3-ba4b-b071-e8bd6b90",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+        "tier": "NotSpecified"
+      },
+      "shared_excelonlinebusiness": {
+        "connectionName": "shared-excelonlinebu-fbc3e3b2-0017-482d-897b-753b-c0c06276",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+        "tier": "NotSpecified"
+      }
+    },
+    "flowFailureAlertSubscribed": false
+  }
+}

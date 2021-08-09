@@ -4,9 +4,9 @@ import FileSaver from 'file-saver'
 
 
 import manifest from './Template/manifest.json'
-import apisMaps from './Template/Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/apisMap.json'
-import connectionsMap from './Template/Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/connectionsMap.json'
-import definitions from './Template/Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/definition.json'
+import apisMaps from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/apisMap.json'
+import connectionsMap from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/connectionsMap.json'
+import definitions from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/definition.json'
 import deepManifest from './Template/Microsoft.Flow/flows/manifest.json'
 function App() {
   const [emails,setEmails] = useState([""])
@@ -53,13 +53,22 @@ function App() {
 
     //Set class name
     let className = classDetails[0]
-    manifest.resources["48390e25-39b4-4e3c-a056-e9770e60df6a"].details.displayName = className + " Register";
+    manifest.resources["68d2d327-aeac-404b-b895-8fc5260d3d23"].details.displayName = className + " Register";
     definitions.properties.displayName = className;
 
     //Set Form Trigger ID
     let formID = classForms[0].substr(classForms[0].indexOf('=')+1);
     definitions.properties.definition.triggers["When_a_new_response_is_submitted"].inputs.parameters.form_id = formID;
     definitions.properties.definition.actions["Get_response_details"].inputs.parameters.form_id = formID;
+
+    //Create WorkSheet
+    definitions.properties.definition.actions["Create_worksheet"].inputs.parameters['body/name'] = className;
+
+    //Create Table
+    definitions.properties.definition.actions["Create_table"].inputs.parameters['table/TableName'] = className + "RegisterTable";
+
+    //Add to Table
+    definitions.properties.definition.actions["Add_a_row_into_a_table"].inputs.parameters.table = className + "RegisterTable";
     
     //Set Send Email
     definitions.properties.definition.actions["Send_an_email_notification_(V3)"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
@@ -80,12 +89,13 @@ function App() {
     definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/body"] = "<p>Class: " + className +"<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Course Link: " + classLink + "</p>"
     definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/numberOfOccurences"] = classDays;
 
+    //Zip and Download File
     let zip = require('jszip')();
     zip.file("manifest.json", JSON.stringify(manifest));
     zip.file("Microsoft.Flow/flows/manifest.json",JSON.stringify(deepManifest));
-    zip.file("Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/apisMap.json",JSON.stringify(apisMaps));
-    zip.file("Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/connectionsMap.json",JSON.stringify(connectionsMap));
-    zip.file("Microsoft.Flow/flows/48390e25-39b4-4e3c-a056-e9770e60df6a/definition.json",JSON.stringify(definitions));
+    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/apisMap.json",JSON.stringify(apisMaps));
+    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/connectionsMap.json",JSON.stringify(connectionsMap));
+    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/definition.json",JSON.stringify(definitions));
 
     zip.generateAsync({type:"blob"}).then((blob) => { 
         FileSaver.saveAs(blob, className + "Template.zip");
