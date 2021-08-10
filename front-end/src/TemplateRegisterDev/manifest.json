@@ -1,20 +1,20 @@
 {
   "schema": 1,
   "details": {
-    "displayName": "Template",
+    "displayName": "TemplateRegister",
     "description": "",
-    "createdTime": "2021-08-09T20:07:27.6403769Z",
-    "packageTelemetryId": "950c89d1-af1a-408f-986f-98d917d71ce1",
+    "createdTime": "2021-08-10T16:30:52.4896781Z",
+    "packageTelemetryId": "b0f35fd0-b3e5-4806-a92a-d6f9137ce994",
     "creator": "N/A",
     "sourceEnvironment": ""
   },
   "resources": {
-    "68d2d327-aeac-404b-b895-8fc5260d3d23": {
+    "f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c": {
       "type": "Microsoft.Flow/flows",
       "suggestedCreationType": "New",
       "creationType": "Existing, New, Update",
       "details": {
-        "displayName": "Finale Test Register"
+        "displayName": "TemplateRegister"
       },
       "configurableBy": "User",
       "hierarchy": "Root",
@@ -26,7 +26,9 @@
         "2f24c415-3aa3-4655-8864-4737fcf5d5c4",
         "126e3518-ef7e-41d3-9087-4f7577d9fc04",
         "2fa55a20-3d43-4be8-9999-c7d854cfebb4",
-        "11760f2e-cabe-4d14-9e00-4a5a42c344a2"
+        "11760f2e-cabe-4d14-9e00-4a5a42c344a2",
+        "305e4d68-5cc0-4c3d-a9bf-638ea769eda5",
+        "9ce02244-ca28-4896-885f-5e7fa15a5742"
       ]
     },
     "046730c2-3787-4417-83a6-7d2fc344aa73": {
@@ -135,6 +137,33 @@
       "hierarchy": "Child",
       "dependsOn": [
         "2fa55a20-3d43-4be8-9999-c7d854cfebb4"
+      ]
+    },
+    "305e4d68-5cc0-4c3d-a9bf-638ea769eda5": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_webcontents",
+      "name": "shared_webcontents",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "HTTP with Azure AD",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "9ce02244-ca28-4896-885f-5e7fa15a5742": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Iliyan.Dimitrov@travelport.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "305e4d68-5cc0-4c3d-a9bf-638ea769eda5"
       ]
     }
   }

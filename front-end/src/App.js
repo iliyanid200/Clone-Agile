@@ -3,11 +3,11 @@ import React,{ useState } from 'react'
 import FileSaver from 'file-saver'
 
 
-import manifest from './Template/manifest.json'
-import apisMaps from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/apisMap.json'
-import connectionsMap from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/connectionsMap.json'
-import definitions from './Template/Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/definition.json'
-import deepManifest from './Template/Microsoft.Flow/flows/manifest.json'
+import manifest from './TemplateRegister/manifest.json'
+import apisMaps from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/apisMap.json'
+import connectionsMap from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/connectionsMap.json'
+import definitions from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/definition.json'
+import deepManifest from './TemplateRegister/Microsoft.Flow/flows/manifest.json'
 function App() {
   const [emails,setEmails] = useState([""])
   const[classTimes,setClassTimes] = useState(["",""])
@@ -19,11 +19,9 @@ function App() {
     setClassDetails(temp);
   }
   const updateClassFomrs = (formURL,index) =>{
-    if(formURL[formURL.length - 1] !== 'm'){
       let temp = [...classForms];
       temp[index] = formURL;
       setClassForms(temp);
-    }
   }
   const updateClassTimes = (time,index) =>{
     let temp = [...classTimes];
@@ -53,27 +51,26 @@ function App() {
 
     //Set class name
     let className = classDetails[0]
-    manifest.resources["68d2d327-aeac-404b-b895-8fc5260d3d23"].details.displayName = className + " Register";
+    manifest.resources["f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c"].details.displayName = className + " Register";
     definitions.properties.displayName = className;
+    definitions.properties.definition.actions["ClassName"].inputs.variables[0].value = className
 
     //Set Form Trigger ID
     let formID = classForms[0].substr(classForms[0].indexOf('=')+1);
     definitions.properties.definition.triggers["When_a_new_response_is_submitted"].inputs.parameters.form_id = formID;
     definitions.properties.definition.actions["Get_response_details"].inputs.parameters.form_id = formID;
 
-    //Create WorkSheet
-    definitions.properties.definition.actions["Create_worksheet"].inputs.parameters['body/name'] = className;
-
-    //Create Table
-    definitions.properties.definition.actions["Create_table"].inputs.parameters['table/TableName'] = className + "RegisterTable";
-
-    //Add to Table
-    definitions.properties.definition.actions["Add_a_row_into_a_table"].inputs.parameters.table = className + "RegisterTable";
+    //Set HTTP URI
+    definitions.properties.definition.actions["Get_Form_Data"].inputs.parameters['request/url'] = "/formapi/api/6416915b-6778-4c36-ba4f-e56ff64a8bb7/users/0d8c8bdf-98f7-47e2-9147-f5acc58199a3/light/runtimeFormsWithResponses('" + formID + "')?$expand=questions($expand=choices)"
     
-    //Set Send Email
-    definitions.properties.definition.actions["Send_an_email_notification_(V3)"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
-    definitions.properties.definition.actions["Send_an_email_notification_(V3)"].inputs.parameters["request/text"] = "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Use this link if you need to be removed from the course: <br>\n<br>\n" + classForms[1] + "</p>"
+    //Set Send Student Email
+    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
+    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/text"] = "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Use this link if you need to be removed from the course: <br>\n<br>\n" + classForms[1] + "</p>"
 
+    //Set Teacher Email
+    let teacherEmailString = "";
+    emails.map((item)=>{return teacherEmailString += item + ';'});
+    definitions.properties.definition.actions["Send_an_email_to_Teacher"].inputs.parameters['request/to'] = teacherEmailString;
     //Set Calender Creation
     let classStartTime = classTimes[0] + ":00";
     let classEndTime = classTimes[0].substr(0,10) + classTimes[1].substr(10) +":00";
@@ -93,12 +90,12 @@ function App() {
     let zip = require('jszip')();
     zip.file("manifest.json", JSON.stringify(manifest));
     zip.file("Microsoft.Flow/flows/manifest.json",JSON.stringify(deepManifest));
-    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/apisMap.json",JSON.stringify(apisMaps));
-    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/connectionsMap.json",JSON.stringify(connectionsMap));
-    zip.file("Microsoft.Flow/flows/68d2d327-aeac-404b-b895-8fc5260d3d23/definition.json",JSON.stringify(definitions));
+    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/apisMap.json",JSON.stringify(apisMaps));
+    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/connectionsMap.json",JSON.stringify(connectionsMap));
+    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/definition.json",JSON.stringify(definitions));
 
     zip.generateAsync({type:"blob"}).then((blob) => { 
-        FileSaver.saveAs(blob, className + "Template.zip");
+        FileSaver.saveAs(blob, className + "RegisterTemplate.zip");
         window.open("https://us.flow.microsoft.com/manage/environments/Default-6416915b-6778-4c36-ba4f-e56ff64a8bb7/flows/import");
     }, (err) => {
         console.log(err)
