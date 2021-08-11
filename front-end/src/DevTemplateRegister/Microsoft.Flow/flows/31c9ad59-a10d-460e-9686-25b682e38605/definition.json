@@ -1,10 +1,10 @@
 {
-  "name": "8fa302c2-6cdb-4636-88f8-dbdfd98c2640",
-  "id": "/providers/Microsoft.Flow/flows/8fa302c2-6cdb-4636-88f8-dbdfd98c2640",
+  "name": "c1a089a5-0348-4c8f-bd5b-aeaece3c3af1",
+  "id": "/providers/Microsoft.Flow/flows/c1a089a5-0348-4c8f-bd5b-aeaece3c3af1",
   "type": "Microsoft.Flow/flows",
   "properties": {
     "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
-    "displayName": "TemplateRegister",
+    "displayName": "CLass Register",
     "definition": {
       "metadata": {
         "workflowEntityId": null,
@@ -12,13 +12,13 @@
         "flowclientsuspensionreason": "None",
         "flowclientsuspensiontime": null,
         "creator": {
-          "id": "514cc954-a47d-42bf-814f-d1975aee6f11",
+          "id": "0d8c8bdf-98f7-47e2-9147-f5acc58199a3",
           "type": "User",
           "tenantId": "6416915b-6778-4c36-ba4f-e56ff64a8bb7"
         },
         "provisioningMethod": "FromDefinition",
         "failureAlertSubscription": true,
-        "clientLastModifiedTime": "2021-08-10T21:08:52.7726807Z"
+        "clientLastModifiedTime": "2021-08-11T20:35:07.3828446Z"
       },
       "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
       "contentVersion": "1.0.0.0",
@@ -43,7 +43,7 @@
               "operationId": "CreateFormWebhook"
             },
             "parameters": {
-              "form_id": "W5EWZHhnNky6T-Vv9kqLt1TJTFF9pL9CgU_Rl1rubxFUQ0hFVzVVNlNUQUczMTIzQTZPVERNOVRHVi4u"
+              "form_id": "W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUQVYzS1Y4NzZLM1FDOTNXSlI5UU00UElNRC4u"
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -60,7 +60,7 @@
               "operationId": "GetFormResponseById"
             },
             "parameters": {
-              "form_id": "W5EWZHhnNky6T-Vv9kqLt1TJTFF9pL9CgU_Rl1rubxFUQ0hFVzVVNlNUQUczMTIzQTZPVERNOVRHVi4u",
+              "form_id": "W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUQVYzS1Y4NzZLM1FDOTNXSlI5UU00UElNRC4u",
               "response_id": "@triggerOutputs()?['body/resourceData/responseId']"
             },
             "authentication": "@parameters('$authentication')"
@@ -134,7 +134,7 @@
               {
                 "name": "ClassName",
                 "type": "string",
-                "value": "TemplateClass"
+                "value": "CLass"
               }
             ]
           }
@@ -187,45 +187,14 @@
             },
             "parameters": {
               "request/method": "GET",
-              "request/url": "/handlers/ResponsePageStartup.ashx?id=W5EWZHhnNky6T-Vv9kqLt1TJTFF9pL9CgU_Rl1rubxFUQ0hFVzVVNlNUQUczMTIzQTZPVERNOVRHVi4u"
-            },
-            "authentication": "@parameters('$authentication')"
-          }
-        },
-        "Create_event_(V4)": {
-          "runAfter": {
-            "Send_an_email_to_Teacher": [
-              "Succeeded"
-            ]
-          },
-          "type": "OpenApiConnection",
-          "inputs": {
-            "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
-              "connectionName": "shared_office365",
-              "operationId": "V4CalendarPostItem"
-            },
-            "parameters": {
-              "table": "AAMkADIwNDM1NGU1LTg2OWMtNDExNS04ZGQ4LTIzYzY4NDhmZjgwZABGAAAAAABuVYzdnpR4SrYnRRcIMlb3BwArNpl_sCaWQ6JP-W7m7hLFAAAATNZrAAD5SX5IM8i0Ra28Lg-doCS2AAAAABC1AAA=",
-              "item/subject": "TestingClass",
-              "item/start": "2021-08-10T14:00:00",
-              "item/end": "2021-08-10T15:00:00",
-              "item/timeZone": "(UTC-07:00) Mountain Time (US & Canada)",
-              "item/body": "<p>Class: TestingClass<br>\nYour Instructors Email's Are:<br>\nTEACHEREMAIL@travelport.com<br>\nCourse Link: LINKTOCLASS</p>",
-              "item/location": "MS Teams",
-              "item/recurrence": "daily",
-              "item/numberOfOccurences": 4,
-              "item/reminderMinutesBeforeStart": 15,
-              "item/isReminderOn": true,
-              "item/showAs": "busy",
-              "item/responseRequested": false
+              "request/url": "/handlers/ResponsePageStartup.ashx?id=W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUQVYzS1Y4NzZLM1FDOTNXSlI5UU00UElNRC4u"
             },
             "authentication": "@parameters('$authentication')"
           }
         },
         "Send_an_email_to_student": {
           "runAfter": {
-            "Add_a_row_into_a_table": [
+            "Get_file_content": [
               "Succeeded"
             ]
           },
@@ -238,8 +207,10 @@
             },
             "parameters": {
               "request/to": "@{outputs('Get_response_details')?['body/responder']};",
-              "request/subject": "Succesfull Registration for TestingClass",
-              "request/text": "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\nTEACHEREMAIL@travelport.com<br>\nUse this link if you need to be removed from the course:<br>\n<br>\n<br>\n<br>\nDROPCLASSURL</p>"
+              "request/subject": "Succesfull Registration for CLass",
+              "request/text": "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\niliyan.dimitrov@travelport.com<br>\nUse this link if you need to be removed from the course: <br>\n<br>\nhttps://forms.office.com/Pages/ResponsePage.aspx?id=W5EWZHhnNky6T-Vv9kqLt9-LjA33mOJHkUf1rMWBmaNUQVYzS1Y4NzZLM1FDOTNXSlI5UU00UElNRC4u</p>",
+              "request/files": "@outputs('Get_file_content')?['body']",
+              "request/filenames": "@outputs('Create_file')?['body/Name']"
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -533,7 +504,7 @@
               "operationId": "SendEmailV3"
             },
             "parameters": {
-              "request/to": "Iliyan.Dimitrov@travelport.com;",
+              "request/to": "iliyan.dimitrov@travelport.com;",
               "request/subject": "@{variables('ClassName')} Student Sighn Up",
               "request/text": "<p>A student with the email address<br>\n@{outputs('Get_response_details')?['body/responder']}<br>\n<br>\nhas sighned up for your course @{variables('ClassName')}. You can view this data within the spreadsheet.<br>\nhttps://travelport365-my.sharepoint.com/:x:/g/personal/iliyan_dimitrov_travelport_com/Eazqo72eCUNMgtKYI02x4mgBpHIHBEcyE11QraCqOGyXFw<br>\n<br>\n<br>\nHere is the Data for the Student:<br>\n@{body('Parse_JSON')}<br>\n</p>"
             },
@@ -705,38 +676,93 @@
             ]
           },
           "type": "Foreach"
+        },
+        "Format_ICS": {
+          "runAfter": {
+            "Add_a_row_into_a_table": [
+              "Succeeded"
+            ]
+          },
+          "type": "Compose",
+          "inputs": "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nURL:\nDTSTART:2021-08-10T13:58:00\nDTEND:2021-08-10T15:58:00\nRRULE:FREQ=DAILY;COUNT=10\nSUMMARY:@{variables('ClassName')}\nDESCRIPTION:\nLOCATION:Online\nEND:VEVENT\nENDVCALENDAR\n\n"
+        },
+        "Create_file": {
+          "runAfter": {
+            "Format_ICS": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CreateFile"
+            },
+            "parameters": {
+              "folderPath": "/",
+              "name": "@{variables('ClassName')}.ics",
+              "body": "@outputs('Format_ICS')"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "contentTransfer": {
+              "transferMode": "Chunked"
+            }
+          }
+        },
+        "Get_file_content": {
+          "runAfter": {
+            "Create_file": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "GetFileContent"
+            },
+            "parameters": {
+              "id": "@outputs('Create_file')?['body/Id']",
+              "inferContentType": true
+            },
+            "authentication": "@parameters('$authentication')"
+          }
         }
       }
     },
     "connectionReferences": {
       "shared_microsoftforms": {
-        "connectionName": "f46e8ff673434a9c824ebe2b4ecda010",
+        "connectionName": "42b76ba803aa42b5a0184f0d4367ee19",
         "source": "Embedded",
         "id": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
         "tier": "NotSpecified"
       },
       "shared_excelonlinebusiness": {
-        "connectionName": "fb10b652bc764eae8b1195dc2f31a954",
+        "connectionName": "d663b30a336e48bfadde8582b2fab264",
         "source": "Embedded",
         "id": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
         "tier": "NotSpecified"
       },
       "shared_webcontents": {
-        "connectionName": "49135b8cac5f41feb4eb2e88fe2e1d09",
+        "connectionName": "c272c0d6c39b41258d6f11554680e053",
         "source": "Embedded",
         "id": "/providers/Microsoft.PowerApps/apis/shared_webcontents",
         "tier": "NotSpecified"
       },
-      "shared_office365": {
-        "connectionName": "88cd1f48cf4a4617a6a3facca109fe0a",
-        "source": "Embedded",
-        "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
-        "tier": "NotSpecified"
-      },
       "shared_sendmail": {
-        "connectionName": "3f1c29c918214e6693def1a6b9509c9d",
+        "connectionName": "c06399dfc2a94ed487579eef272dd1af",
         "source": "Embedded",
         "id": "/providers/Microsoft.PowerApps/apis/shared_sendmail",
+        "tier": "NotSpecified"
+      },
+      "shared_onedriveforbusiness": {
+        "connectionName": "shared-onedriveforbu-365baf2f-8f8c-47be-8beb-7077-846bcc0b",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
         "tier": "NotSpecified"
       }
     },

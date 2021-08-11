@@ -4,9 +4,9 @@ import FileSaver from 'file-saver'
 
 
 import manifest from './TemplateRegister/manifest.json'
-import apisMaps from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/apisMap.json'
-import connectionsMap from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/connectionsMap.json'
-import definitions from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/definition.json'
+import apisMaps from './TemplateRegister/Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/apisMap.json'
+import connectionsMap from './TemplateRegister/Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/connectionsMap.json'
+import definitions from './TemplateRegister/Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/definition.json'
 import deepManifest from './TemplateRegister/Microsoft.Flow/flows/manifest.json'
 function App() {
   const [emails,setEmails] = useState([""])
@@ -51,7 +51,7 @@ function App() {
 
     //Set class name
     let className = classDetails[0]
-    manifest.resources["b418206b-8131-43f6-a335-985524803518"].details.displayName = className + " Register";
+    manifest.resources["31c9ad59-a10d-460e-9686-25b682e38605"].details.displayName = className + " Register";
     definitions.properties.displayName = className;
     definitions.properties.definition.actions["ClassName"].inputs.variables[0].value = className
 
@@ -63,14 +63,6 @@ function App() {
     //Set HTTP URI
     definitions.properties.definition.actions["Get_Form_Data"].inputs.parameters['request/url'] = "/handlers/ResponsePageStartup.ashx?id=" + formID
     
-    //Set Send Student Email
-    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
-    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/text"] = "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Use this link if you need to be removed from the course: <br>\n<br>\n" + classForms[1] + "</p>"
-
-    //Set Teacher Email
-    let teacherEmailString = "";
-    emails.map((item)=>{return teacherEmailString += item + ';'});
-    definitions.properties.definition.actions["Send_an_email_to_Teacher"].inputs.parameters['request/to'] = teacherEmailString;
     //Set Calender Creation
     let classStartTime = classTimes[0] + ":00";
     let classEndTime = classTimes[0].substr(0,10) + classTimes[1].substr(10) +":00";
@@ -79,20 +71,30 @@ function App() {
     console.log(classEndTime);
     console.log(classDays);
 
-    let classLink = classDetails[1];
-    definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/subject"] = className;
-    definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/start"] = classStartTime;
-    definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/end"] = classEndTime;
-    definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/body"] = "<p>Class: " + className +"<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Course Link: " + classLink + "</p>"
-    definitions.properties.definition.actions["Create_event_(V4)"].inputs.parameters["item/numberOfOccurences"] = classDays;
+    //Create Calender Invite
+    let classLink = classDetails[1]
+    let calendarDes =  "Course Link: " + classLink
+    definitions.properties.definition.actions["Format_ICS"].inputs = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nURL:" + classDetails[1] + "\nDTSTART:" + classStartTime + "\nDTEND:" + classEndTime + "\nRRULE:FREQ=DAILY;COUNT=" +classDays+ "\nSUMMARY:@{variables('ClassName')}\nDESCRIPTION:" +calendarDes+ "\nLOCATION:Online\nEND:VEVENT\nENDVCALENDAR\n\n"
+
+    //Set Send Student Email
+    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
+    definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/text"] = "<p>Congradulations you have been added succesfully.<br>\nYour Instructors Email's Are:<br>\n" + emails.map((email)=>{return email + "<br>\n"}) + "Use this link if you need to be removed from the course: <br>\n<br>\n" + classForms[1] + "</>"
+
+    //Set Teacher Email
+    let teacherEmailString = "";
+    emails.map((item)=>{return teacherEmailString += item + ';'});
+    definitions.properties.definition.actions["Send_an_email_to_Teacher"].inputs.parameters['request/to'] = teacherEmailString;
+
+
+
 
     //Zip and Download File
     let zip = require('jszip')();
     zip.file("manifest.json", JSON.stringify(manifest));
     zip.file("Microsoft.Flow/flows/manifest.json",JSON.stringify(deepManifest));
-    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/apisMap.json",JSON.stringify(apisMaps));
-    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/connectionsMap.json",JSON.stringify(connectionsMap));
-    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/definition.json",JSON.stringify(definitions));
+    zip.file("Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/apisMap.json",JSON.stringify(apisMaps));
+    zip.file("Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/connectionsMap.json",JSON.stringify(connectionsMap));
+    zip.file("Microsoft.Flow/flows/31c9ad59-a10d-460e-9686-25b682e38605/definition.json",JSON.stringify(definitions));
 
     zip.generateAsync({type:"blob"}).then((blob) => { 
         FileSaver.saveAs(blob, className + "RegisterTemplate.zip");
