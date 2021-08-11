@@ -158,7 +158,8 @@ function App() {
         <div className='infoTab'>
           <h3>Important Links</h3>
           <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/:x:/r/sites/ClassAutomate/_layouts/15/Doc.aspx?sourcedoc=%7BBAABECE1-EA31-44EA-AEF1-CD20EC61858B%7D&file=Class%20Leger.xlsx&action=default&mobileredirect=true&cid=1d577c35-3d88-4c67-ba1d-9f2785e2d37d'>Excel Link</a>
-          <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/:x:/r/sites/ClassAutomate/_layouts/15/Doc.aspx?sourcedoc=%7BBAABECE1-EA31-44EA-AEF1-CD20EC61858B%7D&file=Class%20Leger.xlsx&action=default&mobileredirect=true&cid=1d577c35-3d88-4c67-ba1d-9f2785e2d37d'>Tutorial Video</a>
+          <a target="_blank" rel="noreferrer" href='https://us.flow.microsoft.com/manage/environments/Default-6416915b-6778-4c36-ba4f-e56ff64a8bb7/connections'>Power Automate</a>
+          <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/sites/ClassAutomate/Shared%20Documents/Forms/AllItems.aspx'>Tutorial Video</a>
           
           <h3>Connection's Names</h3>
           <p>Excel Online (Business)</p> 
