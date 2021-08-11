@@ -161,7 +161,10 @@ function App() {
           <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/:x:/r/sites/ClassAutomate/_layouts/15/Doc.aspx?sourcedoc=%7BBAABECE1-EA31-44EA-AEF1-CD20EC61858B%7D&file=Class%20Leger.xlsx&action=default&mobileredirect=true&cid=1d577c35-3d88-4c67-ba1d-9f2785e2d37d'>Tutorial Video</a>
           
           <h3>Connection's Names</h3>
-          <p>Excel Online (Business)</p>
+          <p>Excel Online (Business)</p> 
+          <p>Office 365 Outlook</p>
+          <p>Microsoft Forms</p>
+          <p>Mail</p>
           <div>
             <p>HTTP with Azure AD</p>
             <div className='details'>
@@ -170,10 +173,7 @@ function App() {
               <p>Azure AD Resource URI (Application ID URI)</p>
               <p className='indentDetails'>https://forms.office.com</p>
             </div>
-          </div>  
-          <p>Office 365 Outlook</p>
-          <p>Microsoft Forms</p>
-          <p>Mail</p>
+          </div> 
       </div>
       </form>
       
