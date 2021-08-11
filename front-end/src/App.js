@@ -4,9 +4,9 @@ import FileSaver from 'file-saver'
 
 
 import manifest from './TemplateRegister/manifest.json'
-import apisMaps from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/apisMap.json'
-import connectionsMap from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/connectionsMap.json'
-import definitions from './TemplateRegister/Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/definition.json'
+import apisMaps from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/apisMap.json'
+import connectionsMap from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/connectionsMap.json'
+import definitions from './TemplateRegister/Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/definition.json'
 import deepManifest from './TemplateRegister/Microsoft.Flow/flows/manifest.json'
 function App() {
   const [emails,setEmails] = useState([""])
@@ -15,7 +15,7 @@ function App() {
   const[classDetails,setClassDetails] = useState(["",""])
   const updateClassDetails = (detail,index) =>{
     let temp = [...classDetails];
-    temp[index] = detail;
+    temp[index] = detail.split(' ').join('_')
     setClassDetails(temp);
   }
   const updateClassFomrs = (formURL,index) =>{
@@ -51,7 +51,7 @@ function App() {
 
     //Set class name
     let className = classDetails[0]
-    manifest.resources["f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c"].details.displayName = className + " Register";
+    manifest.resources["b418206b-8131-43f6-a335-985524803518"].details.displayName = className + " Register";
     definitions.properties.displayName = className;
     definitions.properties.definition.actions["ClassName"].inputs.variables[0].value = className
 
@@ -61,7 +61,7 @@ function App() {
     definitions.properties.definition.actions["Get_response_details"].inputs.parameters.form_id = formID;
 
     //Set HTTP URI
-    definitions.properties.definition.actions["Get_Form_Data"].inputs.parameters['request/url'] = "/formapi/api/6416915b-6778-4c36-ba4f-e56ff64a8bb7/users/0d8c8bdf-98f7-47e2-9147-f5acc58199a3/light/runtimeFormsWithResponses('" + formID + "')?$expand=questions($expand=choices)"
+    definitions.properties.definition.actions["Get_Form_Data"].inputs.parameters['request/url'] = "/handlers/ResponsePageStartup.ashx?id=" + formID
     
     //Set Send Student Email
     definitions.properties.definition.actions["Send_an_email_to_student"].inputs.parameters["request/subject"] = "Succesfull Registration for " + className;
@@ -90,9 +90,9 @@ function App() {
     let zip = require('jszip')();
     zip.file("manifest.json", JSON.stringify(manifest));
     zip.file("Microsoft.Flow/flows/manifest.json",JSON.stringify(deepManifest));
-    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/apisMap.json",JSON.stringify(apisMaps));
-    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/connectionsMap.json",JSON.stringify(connectionsMap));
-    zip.file("Microsoft.Flow/flows/f5ccc2d1-e665-4ec7-9fd5-cc4f707aa19c/definition.json",JSON.stringify(definitions));
+    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/apisMap.json",JSON.stringify(apisMaps));
+    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/connectionsMap.json",JSON.stringify(connectionsMap));
+    zip.file("Microsoft.Flow/flows/b418206b-8131-43f6-a335-985524803518/definition.json",JSON.stringify(definitions));
 
     zip.generateAsync({type:"blob"}).then((blob) => { 
         FileSaver.saveAs(blob, className + "RegisterTemplate.zip");
@@ -111,7 +111,7 @@ function App() {
         <div className='classForms'>
             <div>
               <h3>Class Name</h3>
-              <input onChange={(e)=>updateClassDetails(e.target.value,0)} required/>
+              <input value={classDetails[0]} onChange={(e)=>updateClassDetails(e.target.value,0)} required/>
             </div>
             <div>
               <h3>Meeting Link</h3>
@@ -155,8 +155,28 @@ function App() {
           <input type="submit"  value='Generate Template' className='generateTemplate'></input>
           
         </div>
+        <div className='infoTab'>
+          <h3>Important Links</h3>
+          <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/:x:/r/sites/ClassAutomate/_layouts/15/Doc.aspx?sourcedoc=%7BBAABECE1-EA31-44EA-AEF1-CD20EC61858B%7D&file=Class%20Leger.xlsx&action=default&mobileredirect=true&cid=1d577c35-3d88-4c67-ba1d-9f2785e2d37d'>Excel Link</a>
+          <a target="_blank" rel="noreferrer" href='https://travelport365.sharepoint.com/:x:/r/sites/ClassAutomate/_layouts/15/Doc.aspx?sourcedoc=%7BBAABECE1-EA31-44EA-AEF1-CD20EC61858B%7D&file=Class%20Leger.xlsx&action=default&mobileredirect=true&cid=1d577c35-3d88-4c67-ba1d-9f2785e2d37d'>Tutorial Video</a>
+          
+          <h3>Connection's Names</h3>
+          <p>Excel Online (Business)</p>
+          <div>
+            <p>HTTP with Azure AD</p>
+            <div className='details'>
+              <p>Base Resource URL</p>
+              <p className='indentDetails'>https://forms.office.com</p>
+              <p>Azure AD Resource URI (Application ID URI)</p>
+              <p className='indentDetails'>https://forms.office.com</p>
+            </div>
+          </div>  
+          <p>Office 365 Outlook</p>
+          <p>Microsoft Forms</p>
+          <p>Mail</p>
+      </div>
       </form>
-
+      
 
 
     </div>

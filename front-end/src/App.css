@@ -2,10 +2,14 @@
   font-family: "Arial", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 
 }
+html{
+  overflow: hidden;
+}
 .App{
 width:100%;
 height:100vh;
 background-color: rgb(247, 228, 203);
+
 }
 #travelport_logo{
   width:200px;
@@ -100,3 +104,39 @@ form{
     cursor:pointer;
   }
 
+.infoTab{
+  border:solid 2px black;
+  width:25vw;
+  border-radius: 0px 10px 10px 0px;
+  background-color:rgb(100, 100, 100);
+  color:white;
+
+  transform: translate(660px,50px);
+
+
+}
+
+  .infoTab h3{
+    width: 300px !important;
+  }
+  .infoTab h3, .infoTab p{
+    border:solid black 2px;
+    background-color:rgb(61, 61, 61);
+    width:200px;
+    border-radius: 0px 5px 5px 0px;
+  }
+    .infoTab p{
+      transform: translateX(20px);
+    }
+  .details{
+    transform:translateX(40px)!important
+  }
+    .indentDetails{
+      transform:translateX(60px)!important
+    }
+a{
+  border:solid black 2px;
+  background-color:white;
+  padding:10px;
+  border-radius:5px;
+}
