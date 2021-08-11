@@ -1,1 +1,170 @@
-{"schema":"1.0","details":{"displayName":"TemplateRegister","description":"","createdTime":"2021-08-10T21:11:23.2970827Z","packageTelemetryId":"1d28bd99-9079-4964-bfe7-01184d1f929e","creator":"N/A","sourceEnvironment":""},"resources":{"b418206b-8131-43f6-a335-985524803518":{"type":"Microsoft.Flow/flows","suggestedCreationType":"New","creationType":"Existing, New, Update","details":{"displayName":"TemplateRegister"},"configurableBy":"User","hierarchy":"Root","dependsOn":["046730c2-3787-4417-83a6-7d2fc344aa73","a8fe85d3-8709-4c73-89e2-0922ed6f4262","2fa55a20-3d43-4be8-9999-c7d854cfebb4","cb79e76d-e9a9-4e81-8690-659dece73917","305e4d68-5cc0-4c3d-a9bf-638ea769eda5","63917a75-cef1-4942-a41b-e97eb852d2f5","2f24c415-3aa3-4655-8864-4737fcf5d5c4","e5721ca5-fdd5-4c22-ac2a-f1fa2e31248b","b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e","c552cd10-6f21-4e4d-874b-56105b2c7f2a"]},"046730c2-3787-4417-83a6-7d2fc344aa73":{"id":"/providers/Microsoft.PowerApps/apis/shared_microsoftforms","name":"shared_microsoftforms","type":"Microsoft.PowerApps/apis","suggestedCreationType":"Existing","details":{"displayName":"Microsoft Forms","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1479/1.0.1479.2452/microsoftforms/icon.png"},"configurableBy":"System","hierarchy":"Child","dependsOn":[]},"a8fe85d3-8709-4c73-89e2-0922ed6f4262":{"type":"Microsoft.PowerApps/apis/connections","suggestedCreationType":"Existing","creationType":"Existing","details":{"displayName":"Calvin.Nguyen@travelport.com","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1479/1.0.1479.2452/microsoftforms/icon.png"},"configurableBy":"User","hierarchy":"Child","dependsOn":["046730c2-3787-4417-83a6-7d2fc344aa73"]},"2fa55a20-3d43-4be8-9999-c7d854cfebb4":{"id":"/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness","name":"shared_excelonlinebusiness","type":"Microsoft.PowerApps/apis","suggestedCreationType":"Existing","details":{"displayName":"Excel Online (Business)","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1500/1.0.1500.2502/excelonlinebusiness/icon.png"},"configurableBy":"System","hierarchy":"Child","dependsOn":[]},"cb79e76d-e9a9-4e81-8690-659dece73917":{"type":"Microsoft.PowerApps/apis/connections","suggestedCreationType":"Existing","creationType":"Existing","details":{"displayName":"Calvin.Nguyen@travelport.com","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1500/1.0.1500.2502/excelonlinebusiness/icon.png"},"configurableBy":"User","hierarchy":"Child","dependsOn":["2fa55a20-3d43-4be8-9999-c7d854cfebb4"]},"305e4d68-5cc0-4c3d-a9bf-638ea769eda5":{"id":"/providers/Microsoft.PowerApps/apis/shared_webcontents","name":"shared_webcontents","type":"Microsoft.PowerApps/apis","suggestedCreationType":"Existing","details":{"displayName":"HTTP with Azure AD","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"},"configurableBy":"System","hierarchy":"Child","dependsOn":[]},"63917a75-cef1-4942-a41b-e97eb852d2f5":{"type":"Microsoft.PowerApps/apis/connections","suggestedCreationType":"Existing","creationType":"Existing","details":{"displayName":"Calvin.Nguyen@travelport.com","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"},"configurableBy":"User","hierarchy":"Child","dependsOn":["305e4d68-5cc0-4c3d-a9bf-638ea769eda5"]},"2f24c415-3aa3-4655-8864-4737fcf5d5c4":{"id":"/providers/Microsoft.PowerApps/apis/shared_office365","name":"shared_office365","type":"Microsoft.PowerApps/apis","suggestedCreationType":"Existing","details":{"displayName":"Office 365 Outlook","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1503/1.0.1503.2513/office365/icon.png"},"configurableBy":"System","hierarchy":"Child","dependsOn":[]},"e5721ca5-fdd5-4c22-ac2a-f1fa2e31248b":{"type":"Microsoft.PowerApps/apis/connections","suggestedCreationType":"Existing","creationType":"Existing","details":{"displayName":"Calvin.Nguyen@travelport.com","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1503/1.0.1503.2513/office365/icon.png"},"configurableBy":"User","hierarchy":"Child","dependsOn":["2f24c415-3aa3-4655-8864-4737fcf5d5c4"]},"b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e":{"id":"/providers/Microsoft.PowerApps/apis/shared_sendmail","name":"shared_sendmail","type":"Microsoft.PowerApps/apis","suggestedCreationType":"Existing","details":{"displayName":"Mail","iconUri":"https://connectoricons-prod.azureedge.net/releases/sendmail-block-tenants/1.0.1505.2517/sendmail/icon.png"},"configurableBy":"System","hierarchy":"Child","dependsOn":[]},"c552cd10-6f21-4e4d-874b-56105b2c7f2a":{"type":"Microsoft.PowerApps/apis/connections","suggestedCreationType":"Existing","creationType":"Existing","details":{"displayName":"Mail","iconUri":"https://connectoricons-prod.azureedge.net/releases/sendmail-block-tenants/1.0.1505.2517/sendmail/icon.png"},"configurableBy":"User","hierarchy":"Child","dependsOn":["b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e"]}}}
+{
+  "schema": 1,
+  "details": {
+    "displayName": "TemplateRegister",
+    "description": "",
+    "createdTime": "2021-08-10T21:11:23.2970827Z",
+    "packageTelemetryId": "1d28bd99-9079-4964-bfe7-01184d1f929e",
+    "creator": "N/A",
+    "sourceEnvironment": ""
+  },
+  "resources": {
+    "b418206b-8131-43f6-a335-985524803518": {
+      "type": "Microsoft.Flow/flows",
+      "suggestedCreationType": "New",
+      "creationType": "Existing, New, Update",
+      "details": {
+        "displayName": "TemplateRegister"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Root",
+      "dependsOn": [
+        "046730c2-3787-4417-83a6-7d2fc344aa73",
+        "a8fe85d3-8709-4c73-89e2-0922ed6f4262",
+        "2fa55a20-3d43-4be8-9999-c7d854cfebb4",
+        "cb79e76d-e9a9-4e81-8690-659dece73917",
+        "305e4d68-5cc0-4c3d-a9bf-638ea769eda5",
+        "63917a75-cef1-4942-a41b-e97eb852d2f5",
+        "2f24c415-3aa3-4655-8864-4737fcf5d5c4",
+        "e5721ca5-fdd5-4c22-ac2a-f1fa2e31248b",
+        "b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e",
+        "c552cd10-6f21-4e4d-874b-56105b2c7f2a"
+      ]
+    },
+    "046730c2-3787-4417-83a6-7d2fc344aa73": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+      "name": "shared_microsoftforms",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Microsoft Forms",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1479/1.0.1479.2452/microsoftforms/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "a8fe85d3-8709-4c73-89e2-0922ed6f4262": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Calvin.Nguyen@travelport.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1479/1.0.1479.2452/microsoftforms/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "046730c2-3787-4417-83a6-7d2fc344aa73"
+      ]
+    },
+    "2fa55a20-3d43-4be8-9999-c7d854cfebb4": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+      "name": "shared_excelonlinebusiness",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Excel Online (Business)",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1500/1.0.1500.2502/excelonlinebusiness/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "cb79e76d-e9a9-4e81-8690-659dece73917": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Calvin.Nguyen@travelport.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1500/1.0.1500.2502/excelonlinebusiness/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "2fa55a20-3d43-4be8-9999-c7d854cfebb4"
+      ]
+    },
+    "305e4d68-5cc0-4c3d-a9bf-638ea769eda5": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_webcontents",
+      "name": "shared_webcontents",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "HTTP with Azure AD",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "63917a75-cef1-4942-a41b-e97eb852d2f5": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Calvin.Nguyen@travelport.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1502/1.0.1502.2509/webcontents/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "305e4d68-5cc0-4c3d-a9bf-638ea769eda5"
+      ]
+    },
+    "2f24c415-3aa3-4655-8864-4737fcf5d5c4": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+      "name": "shared_office365",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Office 365 Outlook",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1503/1.0.1503.2513/office365/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "e5721ca5-fdd5-4c22-ac2a-f1fa2e31248b": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Calvin.Nguyen@travelport.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1503/1.0.1503.2513/office365/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "2f24c415-3aa3-4655-8864-4737fcf5d5c4"
+      ]
+    },
+    "b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_sendmail",
+      "name": "shared_sendmail",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Mail",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/sendmail-block-tenants/1.0.1505.2517/sendmail/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "c552cd10-6f21-4e4d-874b-56105b2c7f2a": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Mail",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/sendmail-block-tenants/1.0.1505.2517/sendmail/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "b2e53ee4-9477-4f67-9cbc-a1a2f5684e4e"
+      ]
+    }
+  }
+}

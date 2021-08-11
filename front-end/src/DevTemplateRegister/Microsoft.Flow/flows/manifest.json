@@ -1,1 +1,8 @@
-{"packageSchemaVersion":"1.0","flowAssets":{"assetPaths":["b418206b-8131-43f6-a335-985524803518"]}}
+{
+  "packageSchemaVersion": 1,
+  "flowAssets": {
+    "assetPaths": [
+      "b418206b-8131-43f6-a335-985524803518"
+    ]
+  }
+}
