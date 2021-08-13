@@ -168,6 +168,7 @@ function App() {
           <p>Office 365 Outlook</p>
           <p>Microsoft Forms</p>
           <p>Mail</p>
+          <p>OneDrive for Business</p>
           <div>
             <p>HTTP with Azure AD</p>
             <div className='details'>
